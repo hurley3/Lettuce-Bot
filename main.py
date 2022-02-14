@@ -24,6 +24,11 @@ class Lettuce:
 async def on_ready():
   print("We have logged in as {0.user}".format(client))
 
+@client.event
+async def on_member_join(member):
+  role = discord.utils.get(member.guild.roles, name="Lettuce Member")
+  await member.add_role(role)
+
 @client.group(invoke_without_command=True)
 async def help(ctx):
   em = discord.Embed(title='Help', description='Use !help <command> for extended information on a command. All commands are not case sensetive', color=ctx.author.color)
@@ -41,14 +46,14 @@ async def quote(ctx):
 
 @help.command()
 async def fact(ctx):
-  em = discord.Embed(title='Fuote', description='Sends a random lettuce related fact.  New quotes can be suggested using the suggestFact command')
+  em = discord.Embed(title='Fact', description='Sends a random lettuce related fact.  New quotes can be suggested using the suggestFact command')
   em.add_field(name = '**Syntax**', value = '!fact')
   await ctx.send(embed=em)
 
 @help.command()
 async def lettuce(ctx):
-  em = discord.Embed(title='Suggest Quote', description='Saves a quote that you think should be added to the list of random quotes that the quote command chooses from')
-  em.add_field(name = '**Syntax**', value = '!suggestQuote [quote]')
+  em = discord.Embed(title='Lettuce', description='Says the word lettuce repeatedly')
+  em.add_field(name = '**Syntax**', value = '!lettuce [integer]')
   await ctx.send(embed=em)
 
 @help.command()
@@ -83,6 +88,7 @@ async def countdown(ctx):
 # Of times lettuce is said or the upper for
 # RNG for the number of times it is said
 @client.command()
+@commands.cooldown(1.0, 60.0, commands.BucketType.guild)
 async def Lettuce(ctx, args):
   try:
     num = int(args)
