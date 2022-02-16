@@ -8,7 +8,11 @@ from cogs import audio, fact, quote, meme, suggest
 
 cogs = [audio, fact, quote, meme, suggest]
 
-client = commands.Bot(command_prefix='!', case_insensitive=True, help_command=None)
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
+
+client = commands.Bot(command_prefix='!', case_insensitive=True, help_command=None, intents=intents)
 
 for i in cogs:
     i.setup(client)
