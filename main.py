@@ -1,108 +1,125 @@
 import discord
 import os
-import time
-import random
-import datetime
 import Keep_Alive
 from dataclasses import dataclass
 from discord.ext import commands
-#from ffmpeg import video
-from cogs import audio ,fact, quote, meme, suggest
+# from ffmpeg import video
+from cogs import audio, fact, quote, meme, suggest
 
 cogs = [audio, fact, quote, meme, suggest]
 
 client = commands.Bot(command_prefix='!', case_insensitive=True, help_command=None)
 
 for i in cogs:
-  i.setup(client)
+    i.setup(client)
+
 
 @dataclass
 class Lettuce:
-	name: str
+    name: str
+
 
 @client.event
 async def on_ready():
-  print("We have logged in as {0.user}".format(client))
+    print("We have logged in as {0.user}".format(client))
+
 
 @client.event
 async def on_member_join(member):
-  role = discord.utils.get(member.guild.roles, name="Lettuce Member")
-  await member.add_role(role)
+    role = discord.utils.get(member.guild.roles, name="Lettuce Member")
+    await member.add_roles(role)
+
 
 @client.group(invoke_without_command=True)
 async def help(ctx):
-  em = discord.Embed(title='Help', description='Use !help <command> for extended information on a command. All commands are not case sensetive', color=ctx.author.color)
+    em = discord.Embed(title='Help',
+                       description='Use !help <command> for extended information on a command. All commands are not case sensetive',
+                       color=ctx.author.color)
 
-  em.add_field(name="Fun", value='Quote, Fact, Lettuce, Meme')
-  em.add_field(name='Suggestions', value='suggestQuote, suggestFact, suggest')
-  em.add_field(name='Club Info', value='Countdown')
-  await ctx.send(embed=em)
+    em.add_field(name="Fun", value='Quote, Fact, Lettuce, Meme')
+    em.add_field(name='Suggestions', value='suggestQuote, suggestFact, suggest')
+    em.add_field(name='Club Info', value='Countdown')
+    await ctx.send(embed=em)
+
 
 @help.command()
 async def quote(ctx):
-  em = discord.Embed(title='Quote', description='Sends a random lettuce related quote.  New quotes can be suggested using the suggestQuote command')
-  em.add_field(name = '**Syntax**', value = '!quote')
-  await ctx.send(embed=em)
+    em = discord.Embed(title='Quote',
+                       description='Sends a random lettuce related quote.  New quotes can be suggested using the suggestQuote command')
+    em.add_field(name='**Syntax**', value='!quote')
+    await ctx.send(embed=em)
+
 
 @help.command()
 async def fact(ctx):
-  em = discord.Embed(title='Fact', description='Sends a random lettuce related fact.  New quotes can be suggested using the suggestFact command')
-  em.add_field(name = '**Syntax**', value = '!fact')
-  await ctx.send(embed=em)
+    em = discord.Embed(title='Fact',
+                       description='Sends a random lettuce related fact.  New quotes can be suggested using the suggestFact command')
+    em.add_field(name='**Syntax**', value='!fact')
+    await ctx.send(embed=em)
+
 
 @help.command()
 async def lettuce(ctx):
-  em = discord.Embed(title='Lettuce', description='Says the word lettuce repeatedly')
-  em.add_field(name = '**Syntax**', value = '!lettuce [integer]')
-  await ctx.send(embed=em)
+    em = discord.Embed(title='Lettuce', description='Says the word lettuce repeatedly')
+    em.add_field(name='**Syntax**', value='!lettuce [integer]')
+    await ctx.send(embed=em)
+
 
 @help.command()
 async def countdown(ctx):
-  em = discord.Embed(title='Countdown', description='Tells you the number of days until the next competition')
-  em.add_field(name = '**Syntax**', value = '!countdown')
-  await ctx.send(embed=em)
+    em = discord.Embed(title='Countdown', description='Tells you the number of days until the next competition')
+    em.add_field(name='**Syntax**', value='!countdown')
+    await ctx.send(embed=em)
+
 
 @help.command()
 async def suggestQuote(ctx):
-  em = discord.Embed(title='Suggest Quote', description='Sends a random lettuce related quote.  New quotes can be suggested using the suggestQuote command')
-  em.add_field(name = '**Syntax**', value = '!quote')
-  await ctx.send(embed=em)
+    em = discord.Embed(title='Suggest Quote',
+                       description='Sends a random lettuce related quote.  New quotes can be suggested using the suggestQuote command')
+    em.add_field(name='**Syntax**', value='!quote')
+    await ctx.send(embed=em)
+
 
 @help.command()
 async def meme(ctx):
-  em = discord.Embed(title='Meme', description='Sends a random lettuce meme')
-  em.add_field(name='**Syntax**', value='!meme')
-  await ctx.send(embed=em)
+    em = discord.Embed(title='Meme', description='Sends a random lettuce meme')
+    em.add_field(name='**Syntax**', value='!meme')
+    await ctx.send(embed=em)
+
 
 @help.command()
 async def suggest(ctx):
-  em = discord.Embed(title='Suggest', description='Stores any suggestions you have for the devs reguarding the bot')
-  em.add_field(name='**Syntax**', value='!suggest [suggestion]')
-  await ctx.send(embed=em)
+    em = discord.Embed(title='Suggest', description='Stores any suggestions you have for the devs reguarding the bot')
+    em.add_field(name='**Syntax**', value='!suggest [suggestion]')
+    await ctx.send(embed=em)
+
 
 @client.command()
 async def countdown(ctx):
-  await ctx.send("Date of competition TBD")
+    await ctx.send("Date of competition TBD")
+
 
 # Not sure if you wanted x to be the number
 # Of times lettuce is said or the upper for
 # RNG for the number of times it is said
 @client.command()
-@commands.cooldown(1.0, 60.0, commands.BucketType.guild)
+@commands.cooldown(1, 60.0, commands.BucketType.guild)
 async def Lettuce(ctx, args):
-  try:
-    num = int(args)
-    if num > 10:
-      await ctx.send(f'{num} is larger than 10. For performance reasons I will only send Lettuce 10 times')
-      num = 10
-    for i in range(num):
-      await ctx.send("Lettuce")
-  except:
-    await ctx.send(f'\"{args}\" is not an integer')
+    try:
+        num = int(args)
+        if num > 10:
+            await ctx.send(f'{num} is larger than 10. For performance reasons I will only send Lettuce 10 times')
+            num = 10
+        for i in range(num):
+            await ctx.send("Lettuce")
+    except:
+        await ctx.send(f'\"{args}\" is not an integer')
+
 
 @client.command()
 async def readme(ctx):
-  pass
+    pass
+
 
 @client.command()
 async def scream(ctx):
@@ -112,9 +129,12 @@ async def scream(ctx):
     if not voice_client.is_playing():
         voice_client.play(audio_source, after=None)
 
+
 @client.command()
 async def kill(ctx):
-  await client.logout()
+    await client.logout()
+
+
 '''
 @client.command(pass_context=True)
 async def scream(ctx):
@@ -130,9 +150,8 @@ async def scream(ctx):
   await vc.disconnect()
 '''
 
-
-#@client.event
-#async def on_message(message):
+# @client.event
+# async def on_message(message):
 #  if message.author == client.user:
 #    return
 #  author =(str(message.author))
@@ -156,20 +175,17 @@ async def scream(ctx):
 #    await message.channel.send("There are " + diff + " days until the lettuce competition")
 
 
+# Lettuce commands/functionaity ideas
+# Lettuce quotes
+# Pick a number 1-x and it says lettuce that many times
+# lettuce facts
+# count down to lettuce competition (once date is set)
+# lettuce trivia
+# command that sends lettuce memes
+# command that makes it join a vc and scream lettuce (dont know how to do this one tbh)
 
 
-
-#Lettuce commands/functionaity ideas
-  #Lettuce quotes 
-  #Pick a number 1-x and it says lettuce that many times
-  #lettuce facts
-  #count down to lettuce competition (once date is set)
-  #lettuce trivia
-  #command that sends lettuce memes
-  #command that makes it join a vc and scream lettuce (dont know how to do this one tbh)
-
-
-#Script shit
+# Script shit
 Keep_Alive.keep_alive()
 my_secret = os.environ['TOKEN']
 
