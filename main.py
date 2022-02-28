@@ -4,9 +4,9 @@ import Keep_Alive
 from dataclasses import dataclass
 from discord.ext import commands
 # from ffmpeg import video
-from cogs import audio, fact, quote, meme, suggest
+from cogs import audio, fact, quote, meme, suggest, count
 
-cogs = [audio, fact, quote, meme, suggest]
+cogs = [audio, fact, quote, meme, suggest, count]
 
 intents = discord.Intents.default()
 intents.members = True
