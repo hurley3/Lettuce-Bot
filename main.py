@@ -114,13 +114,13 @@ async def Lettuce(ctx, args):
         if num > 10:
             await ctx.send(f'{num} is larger than 10. For performance reasons I will only send Lettuce 10 times')
             num = 10
-        f = open("./assets/lettuce_count.txt", 'r')
+        with open('assets/lettuce_count.txt', 'r') as f:
         count = f.readline()
         for i in range(num):
             count += 1
             await ctx.send("Lettuce")
         f.close()
-        f = open("./assets/lettuce_count.txt", 'w')
+        with open("assets/lettuce_count.txt", 'w') as f:
         f.write(count)
         f.close()
     except:
