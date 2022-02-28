@@ -28,19 +28,20 @@ async def on_ready():
     print("We have logged in as {0.user}".format(client))
 
 
-@client.event()
+@client.event
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Lettuce Member")
     await member.add_roles(role)
 
-@client.event()
+@client.event
 async def on_message(message):
-    if lettuce in message.content.lower():
+    if 'lettuce' in message.content.lower():
         with open('assets/lettuce_count.txt', 'r') as f:
             count = int(f.readline())
             count += 1
         with open('assets/lettuce_count.txt', 'w') as f:
             f.write(str(count))
+    await client.process_commands(message)
 
 @client.group(invoke_without_command=True)
 async def help(ctx):
