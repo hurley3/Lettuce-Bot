@@ -28,11 +28,19 @@ async def on_ready():
     print("We have logged in as {0.user}".format(client))
 
 
-@client.event
+@client.event()
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Lettuce Member")
     await member.add_roles(role)
 
+@client.event()
+async def on_message(message):
+    if lettuce in message.content.lower():
+        with open('assets/lettuce_count.txt', 'r') as f:
+            count = int(f.readline())
+            count += 1
+        with open('assets/lettuce_count.txt', 'w') as f:
+            f.write(str(count))
 
 @client.group(invoke_without_command=True)
 async def help(ctx):
@@ -119,15 +127,15 @@ async def Lettuce(ctx, args):
         if num > 10:
             await ctx.send(f'{num} is larger than 10. For performance reasons I will only send Lettuce 10 times')
             num = 10
-        with open('assets/lettuce_count.txt', 'r') as f:
-            count = int(f.readline())
+        #with open('assets/lettuce_count.txt', 'r') as f:
+        #    count = int(f.readline())
             for i in range(num):
-                count += 1
+        #        count += 1
                 await ctx.send("Lettuce")
-        f.close()
-        with open("assets/lettuce_count.txt", 'w') as f:
-            f.write(str(count))
-        f.close()
+        #f.close()
+        #with open("assets/lettuce_count.txt", 'w') as f:
+        #    f.write(str(count))
+        #f.close()
 
     except:
         await ctx.send(f'\"{args}\" is not an integer')
