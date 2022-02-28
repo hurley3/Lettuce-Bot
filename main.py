@@ -40,7 +40,7 @@ async def help(ctx):
                        description='Use !help <command> for extended information on a command. All commands are not case sensetive',
                        color=ctx.author.color)
 
-    em.add_field(name="Fun", value='Quote, Fact, Lettuce, Meme')
+    em.add_field(name="Fun", value='Quote, Fact, Lettuce, Meme, Count')
     em.add_field(name='Suggestions', value='suggestQuote, suggestFact, suggest')
     em.add_field(name='Club Info', value='Countdown')
     await ctx.send(embed=em)
@@ -97,6 +97,11 @@ async def suggest(ctx):
     em.add_field(name='**Syntax**', value='!suggest [suggestion]')
     await ctx.send(embed=em)
 
+@help.command()
+async def count(ctx):
+    em = discord.Embed(title='Count', description='Counts the number of times the bot has said lettuce')
+    em.add_field(name='**Syntax**', value='!count')
+    await ctx.send(embed=em)
 
 @client.command()
 async def countdown(ctx):
