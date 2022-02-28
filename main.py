@@ -121,7 +121,7 @@ async def Lettuce(ctx, args):
             await ctx.send("Lettuce")
     f.close()
     with open("assets/lettuce_count.txt", 'w') as f:
-        f.write(count)
+        f.write(str(count))
     f.close()
 
 
