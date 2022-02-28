@@ -8,11 +8,11 @@ from cogs import audio, fact, quote, meme, suggest
 
 cogs = [audio, fact, quote, meme, suggest]
 
-#intents = discord.Intents.default()
-#intents.members = True
-#intents.presences = True
+intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
 
-client = commands.Bot(command_prefix='!', case_insensitive=True, help_command=None)#, intents=intents)
+client = commands.Bot(command_prefix='!', case_insensitive=True, help_command=None, intents=intents)
 
 for i in cogs:
     i.setup(client)
@@ -114,8 +114,15 @@ async def Lettuce(ctx, args):
         if num > 10:
             await ctx.send(f'{num} is larger than 10. For performance reasons I will only send Lettuce 10 times')
             num = 10
+        f = open("./assets/lettuce_count.txt", 'r')
+        count = f.readline()
         for i in range(num):
+            count += 1
             await ctx.send("Lettuce")
+        f.close()
+        f = open("./assets/lettuce_count.txt", 'w')
+        f.write(count)
+        f.close()
     except:
         await ctx.send(f'\"{args}\" is not an integer')
 
