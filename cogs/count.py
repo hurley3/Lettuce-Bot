@@ -12,7 +12,7 @@ class fact(commands.Cog):
         with open('./assets/lettuce_count.txt', 'r') as f:
             contents = f.readline()
         f.close()
-        await ctx.send(f'I have said lettuce {contents} times')
+        await ctx.send(f'Lettuce has been said {contents} times')
 
 def setup(client):
     client.add_cog(fact(client))

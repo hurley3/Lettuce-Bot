@@ -4,9 +4,9 @@ import Keep_Alive
 from dataclasses import dataclass
 from discord.ext import commands
 # from ffmpeg import video
-from cogs import audio, fact, quote, meme, suggest, count
+from cogs import audio, fact, quote, meme, suggest, count, lettuce
 
-cogs = [audio, fact, quote, meme, suggest, count]
+cogs = [audio, fact, quote, meme, suggest, count, lettuce]
 
 intents = discord.Intents.default()
 intents.members = True
@@ -35,7 +35,7 @@ async def on_member_join(member):
 
 @client.event
 async def on_message(message):
-    if 'lettuce' in message.content.lower():
+    if 'lettuce' in message.content.lower() and message.author.id != client.user.id:
         with open('assets/lettuce_count.txt', 'r') as f:
             count = int(f.readline())
             count += 1
@@ -120,6 +120,7 @@ async def countdown(ctx):
 # Not sure if you wanted x to be the number
 # Of times lettuce is said or the upper for
 # RNG for the number of times it is said
+'''
 @client.command()
 @commands.cooldown(1, 60.0, commands.BucketType.guild)
 async def Lettuce(ctx, args):
@@ -141,7 +142,7 @@ async def Lettuce(ctx, args):
     except:
         await ctx.send(f'\"{args}\" is not an integer')
 
-
+'''
 @client.command()
 async def readme(ctx):
     pass
