@@ -6,7 +6,7 @@ class lettuce(commands.Cog):
         self.client = client
 
     @commands.command()
-    @commands.cooldown(1, 60.0, commands.BucketType.guild)
+    @commands.cooldown(1, 60.0, commands.BucketType.user)
     async def lettuce(self, ctx, args):
         #await ctx.send(args)
         try:
