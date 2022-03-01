@@ -4,9 +4,9 @@ import Keep_Alive
 from dataclasses import dataclass
 from discord.ext import commands
 # from ffmpeg import video
-from cogs import audio, fact, quote, meme, suggest, count
+from cogs import audio, fact, quote, meme, suggest, count, lettuce
 
-cogs = [audio, fact, quote, meme, suggest, count]
+cogs = [audio, fact, quote, meme, suggest, count, lettuce]
 
 intents = discord.Intents.default()
 intents.members = True
@@ -33,6 +33,15 @@ async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name="Lettuce Member")
     await member.add_roles(role)
 
+@client.event
+async def on_message(message):
+    if 'lettuce' in message.content.lower() and message.author.id != client.user.id:
+        with open('assets/lettuce_count.txt', 'r') as f:
+            count = int(f.readline())
+            count += 1
+        with open('assets/lettuce_count.txt', 'w') as f:
+            f.write(str(count))
+    await client.process_commands(message)
 
 @client.group(invoke_without_command=True)
 async def help(ctx):
@@ -40,7 +49,7 @@ async def help(ctx):
                        description='Use !help <command> for extended information on a command. All commands are not case sensetive',
                        color=ctx.author.color)
 
-    em.add_field(name="Fun", value='Quote, Fact, Lettuce, Meme')
+    em.add_field(name="Fun", value='Quote, Fact, Lettuce, Meme, Count')
     em.add_field(name='Suggestions', value='suggestQuote, suggestFact, suggest')
     em.add_field(name='Club Info', value='Countdown')
     await ctx.send(embed=em)
@@ -97,6 +106,11 @@ async def suggest(ctx):
     em.add_field(name='**Syntax**', value='!suggest [suggestion]')
     await ctx.send(embed=em)
 
+@help.command()
+async def count(ctx):
+    em = discord.Embed(title='Count', description='Counts the number of times the bot has said lettuce')
+    em.add_field(name='**Syntax**', value='!count')
+    await ctx.send(embed=em)
 
 @client.command()
 async def countdown(ctx):
@@ -106,6 +120,7 @@ async def countdown(ctx):
 # Not sure if you wanted x to be the number
 # Of times lettuce is said or the upper for
 # RNG for the number of times it is said
+'''
 @client.command()
 @commands.cooldown(1, 60.0, commands.BucketType.guild)
 async def Lettuce(ctx, args):
@@ -114,19 +129,20 @@ async def Lettuce(ctx, args):
         if num > 10:
             await ctx.send(f'{num} is larger than 10. For performance reasons I will only send Lettuce 10 times')
             num = 10
-        f = open("./assets/lettuce_count.txt", 'r')
-        count = f.readline()
-        for i in range(num):
-            count += 1
-            await ctx.send("Lettuce")
-        f.close()
-        f = open("./assets/lettuce_count.txt", 'w')
-        f.write(count)
-        f.close()
+        #with open('assets/lettuce_count.txt', 'r') as f:
+        #    count = int(f.readline())
+            for i in range(num):
+        #        count += 1
+                await ctx.send("Lettuce")
+        #f.close()
+        #with open("assets/lettuce_count.txt", 'w') as f:
+        #    f.write(str(count))
+        #f.close()
+
     except:
         await ctx.send(f'\"{args}\" is not an integer')
 
-
+'''
 @client.command()
 async def readme(ctx):
     pass
