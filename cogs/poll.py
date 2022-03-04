@@ -59,7 +59,8 @@ class poll(commands.Cog):
                                                        total_votes)))
 
         for i, answer in enumerate(options):
-            await message.add_reaction(reactions[i])
+            #await message.add_reaction(reactions[i])
+            await message.add_reaction('<:one:949027315684356156>')
 
         def check(reaction, user):
             return reaction.message.id == message.id and user.id != 938987074286145536
