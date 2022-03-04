@@ -26,7 +26,7 @@ class poll(commands.Cog):
                                      236289100749996033,
                                      461329912557731841,
                                      317792131366518784]:
-            await ctx.message.delete(ctx.message)
+            await ctx.message.delete()
             answers = ''
             emoji_answer = {}
             votes = {}
