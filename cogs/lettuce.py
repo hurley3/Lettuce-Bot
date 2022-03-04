@@ -17,7 +17,9 @@ class lettuce(commands.Cog):
             for i in range(num):
                 await ctx.send("Lettuce")
         except:
-            await ctx.send(f'\"{args}\" is not an integer')
+            channel = self.client.get_channel(949150792886140958)
+            await channel.send(f'\"{args}\" is not an integer')
+            #await ctx.send(f'\"{args}\" is not an integer')
 
 def setup(client):
     client.add_cog(lettuce(client))
