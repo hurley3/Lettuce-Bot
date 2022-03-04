@@ -60,7 +60,7 @@ class poll(commands.Cog):
 
         for i, answer in enumerate(options):
             #await message.add_reaction(reactions[i])
-            a = "\N{KEYCAP: 1}"
+            a = "0️⃣"
             await message.add_reaction("\N{ONE}")
 
         def check(reaction, user):
