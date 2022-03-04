@@ -19,13 +19,13 @@ class poll(commands.Cog):
     # helper method
 
     @commands.command()
-    async def poll(self, ctx, duration='0:0:0', multiple="single", question="", *options : str):
-        if ctx.user.id in [593089008255631400,
-                           540009474920939520,
-                           461330847287476226,
-                           236289100749996033,
-                           461329912557731841,
-                           317792131366518784]:
+    async def poll(self, ctx, duration='0:0:0', multiple="single", question="", *options: str):
+        if ctx.message.author.id in [593089008255631400,
+                                     540009474920939520,
+                                     461330847287476226,
+                                     236289100749996033,
+                                     461329912557731841,
+                                     317792131366518784]:
             await ctx.message.delete(ctx.message)
             answers = ''
             emoji_answer = {}
@@ -48,7 +48,8 @@ class poll(commands.Cog):
             # figure out when the poll should end
             duration = list(map(int, duration.split(":")))
             start_time = datetime.datetime.now()
-            end_time = datetime.datetime.now() + datetime.timedelta(hours=duration[0], minutes=duration[1], seconds=duration[2])
+            end_time = datetime.datetime.now() + datetime.timedelta(hours=duration[0], minutes=duration[1],
+                                                                    seconds=duration[2])
 
             # concat answers
             for i, answer in enumerate(options):
@@ -116,5 +117,6 @@ class poll(commands.Cog):
                                                    "# of voters: " + str(len(voters)) + "\n# of votes: " + str(
                                                        total_votes)))
 
+
 def setup(client):
-  client.add_cog(poll(client))
+    client.add_cog(poll(client))
