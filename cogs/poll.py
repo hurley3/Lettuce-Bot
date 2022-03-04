@@ -60,8 +60,7 @@ class poll(commands.Cog):
 
         for i, answer in enumerate(options):
             #await message.add_reaction(reactions[i])
-            a = "0️⃣"
-            await message.add_reaction("\N{ONE}")
+            await message.add_reaction("1️⃣")
 
         def check(reaction, user):
             return reaction.message.id == message.id and user.id != 938987074286145536
