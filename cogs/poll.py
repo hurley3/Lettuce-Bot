@@ -19,13 +19,15 @@ class poll(commands.Cog):
     # helper method
 
     @commands.command()
-    async def poll(self, ctx, duration='0:0:0', question="", *options : str):
+    async def poll(self, ctx, duration='0:0:0', multiple="single", question="", *options : str):
         answers = ''
         emoji_answer = {}
         votes = {}
         voters = []
         total_votes = 0
         multi = False
+        if multiple.lower() == "multiple":
+            multi = True
         reactions = ['<:one:949027315684356156>',
                      '<:two:949027679477305425>',
                      '<:three:949027946025328660>',
