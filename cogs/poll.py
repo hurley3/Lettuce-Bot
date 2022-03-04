@@ -28,16 +28,16 @@ class poll(commands.Cog):
         multi = False
         if multiple.lower() == "multiple":
             multi = True
-        reactions = ['<:one:949027315684356156>',
-                     '<:two:949027679477305425>',
-                     '<:three:949027946025328660>',
-                     '<:four:949028180528869438>',
-                     '<:five:949028350939242556>',
-                     '<:six:949028456493121637>',
-                     '<:seven:949028548616785982>',
-                     '<:eight:949028668250931230>',
-                     '<:nine:949028784978407486>',
-                     '<:ten:949028856067657819']
+        reactions = ['1️⃣',
+                     '2️⃣',
+                     '3️⃣',
+                     '4️⃣',
+                     '5️⃣',
+                     '6️⃣',
+                     '7️⃣',
+                     '8️⃣',
+                     '9️⃣',
+                     '🔟']
         # figure out when the poll should end
         duration = list(map(int, duration.split(":")))
         start_time = datetime.datetime.now()
@@ -59,8 +59,7 @@ class poll(commands.Cog):
                                                        total_votes)))
 
         for i, answer in enumerate(options):
-            #await message.add_reaction(reactions[i])
-            await message.add_reaction("1️⃣")
+            await message.add_reaction(reactions[i])
 
         def check(reaction, user):
             return reaction.message.id == message.id and user.id != 938987074286145536
