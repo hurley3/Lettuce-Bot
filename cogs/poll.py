@@ -107,4 +107,5 @@ class poll(commands.Cog):
                                                "# of voters: " + str(len(voters)) + "\n# of votes: " + str(
                                                    total_votes)))
 
-
+def setup(client):
+  client.add_cog(poll(client))
