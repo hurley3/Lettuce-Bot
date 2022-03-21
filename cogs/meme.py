@@ -8,7 +8,7 @@ class meme(commands.Cog):
   
   @commands.command()
   async def meme(self, ctx):
-    img = f'./assets/memes/{random.randint(0, 16)}.jpg'
+    img = f'./assets/memes/{random.randint(0, 17)}.jpg'
     await ctx.send(file=discord.File(img))
 
 def setup(client):
