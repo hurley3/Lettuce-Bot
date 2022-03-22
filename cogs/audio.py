@@ -7,6 +7,12 @@ class audio(commands.Cog):
     self.client = client
 
   @commands.command()
+  async def scream(self,ctx):
+    channel = discord.utils.get(ctx.guild.channels, name='Lettuce Lounge')
+    vc = await voicechannel.connect()
+    vc.play(discord.FFmpegPcMAudio("lettuce.mp3"))
+
+  @commands.command()
   async def join(self, ctx):
     if ctx.author.voice is None:
       await ctx.send("You are not in a voice channel")

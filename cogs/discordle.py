@@ -92,4 +92,8 @@ class discordle(commands.Cog):
 
 
 def setup(client):
+<<<<<<< HEAD
     client.add_cog(discordle(client))
+=======
+    client.add_cog(discordle(client))
+>>>>>>> origin/master
