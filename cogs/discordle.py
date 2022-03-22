@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import random
 
-from main import client
+#from main import client
 
 maxGuess = 6  # number of rounds
 filepath = "words.txt"  # path to words file (entries) must be newline separated)
