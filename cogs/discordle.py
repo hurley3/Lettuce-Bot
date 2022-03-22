@@ -47,7 +47,7 @@ class discordle(commands.Cog):
             guess = "9"
             while guess not in words or list(guess) in guessList:
                 guessPrompt = await ctx.send("Guess a word: (type \"quit\" to quit)")
-                playerIn = await client.wait_for("message")
+                playerIn = await ctx.wait_for("message")
                 try:
                     await error.delete()
                 except:
