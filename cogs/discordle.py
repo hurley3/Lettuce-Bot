@@ -5,7 +5,7 @@ import random
 #from main import client
 
 maxGuess = 6  # number of rounds
-filepath = "words.txt"  # path to words file (entries) must be newline separated)
+filepath = "./assets/discordle_words.txt"  # path to words file (entries) must be newline separated)
 
 bs = ":black_large_square:"  # HINT wrong letter emoji
 ys = ":yellow_square:"  # HINT present letter emoji
