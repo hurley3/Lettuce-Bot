@@ -26,7 +26,7 @@ class discordle(commands.Cog):
         self.client = client
 
     @commands.command()
-    async def discordle(ctx):
+    async def discordle(self, ctx):
         ri = ":regional_indicator_"
         wordPos = random.randint(0, len(words) - 1)
         correctWord = words[wordPos]
