@@ -4,9 +4,9 @@ import Keep_Alive
 from dataclasses import dataclass
 from discord.ext import commands
 # from ffmpeg import video
-from cogs import audio, fact, quote, meme, suggest, count, lettuce, poll
+from cogs import audio, fact, quote, meme, suggest, count, lettuce, poll, discordle
 
-cogs = [audio, fact, quote, meme, suggest, count, lettuce, poll]
+cogs = [audio, fact, quote, meme, suggest, count, lettuce, poll, discordle]
 
 intents = discord.Intents.default()
 intents.members = True
@@ -138,10 +138,8 @@ async def Lettuce(ctx, args):
         #with open("assets/lettuce_count.txt", 'w') as f:
         #    f.write(str(count))
         #f.close()
-
     except:
         await ctx.send(f'\"{args}\" is not an integer')
-
 '''
 @client.command()
 async def readme(ctx):
@@ -194,7 +192,7 @@ async def scream(ctx):
 #    await message.channel.send(fact)
 #
 #  #Lettuce competition countdown
-#	
+#
 #  if (message.content.startswith("!Lettuce #countdown")):
 #    today = datetime.date.today()
 #    future = datetime.date(2019,9,20)
