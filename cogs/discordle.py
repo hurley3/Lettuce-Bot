@@ -93,4 +93,3 @@ class discordle(commands.Cog):
 
 def setup(client):
     client.add_cog(discordle(client))
-    client.add_cog(discordle(client))
